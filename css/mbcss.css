@@ -1,0 +1,47 @@
+h1{
+    color: steelblue;font-size: 50px;
+}
+body{
+    text-align: center;
+    padding:20px 350px 50px 350px;
+}
+form{
+    text-align: left;
+    margin-left: auto;
+    margin-right: auto;
+}
+.bg span{
+    width:100px;display:inline-block;
+}
+.bg {
+    width:210mm;height: 297mm;
+}
+.grxx{
+    float: left;  display: block;  width: 240px;  height:200px;  margin-right:20px;  padding: 0;text-align:left;
+}
+img{
+    padding-left: 60px;
+}
+.p{
+    width:210mm;
+}
+.xx{
+    width:210mm;margin: 5px 10px;padding: 0;text-align: left;
+}
+.gr{
+    width:210mm;height:250px;margin: 0;padding: 0;
+}
+.qz {
+    width:210mm;height:110px;margin: 0;padding: 0;text-align: left;
+}
+.qzyx{
+    width:210mm;  height:50px;margin: 0;  padding: 0;text-align: left;
+}.qzyx1{
+     width:210mm;  height:50px;  margin:0;  padding: 0;text-align: left;
+}
+ .img{
+     width:240px; height:200px;padding: 1% 2%;
+ }
+.jy{
+    width:210mm;height:123px;margin: 0;padding: 0;
+}

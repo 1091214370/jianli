@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+    <title>创意版--专门针对设计类工作的简历</title>
+    <link href="css/jquery-ui.min.css" rel="stylesheet">
+    <link href="css/canvas.css" rel="stylesheet">
+    <link href="css/tanchuang.css" rel="stylesheet">
+    <script src="js/html2canvas.js"></script>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/jquery-ui.min.js"></script>
+    <script src="js/jquery.form.js"></script>
+    <script src="js/canvas.js"></script>
+    <script src="js/myjs.js"></script>
+    <script type="text/javascript">
+        function startUpload1() {
+            document.getElementById('processing1').innerHTML = 'loding...';
+            return true;
+        }
+        function startUpload2() {
+            document.getElementById('processing2').innerHTML = 'loding...';
+            return true;
+        }
+        function stopUpload1(rel){
+            var msg;
+            switch (rel) {
+                case 0:
+                    msg = "上传成功";
+                    break;
+                case 1:
+                    msg = "上传的文件超过限制";
+                    break;
+                case 2:
+                    msg = "只能上传图片文件";
+                    break;
+                default:
+                    msg = "上传文件失败";
+            }
+            document.getElementById('processing1').innerHTML = msg;
+        }
+        function stopUpload2(rel){
+            var msg;
+            switch (rel) {
+                case 0:
+                    msg = "上传成功";
+                    break;
+                case 1:
+                    msg = "上传的文件超过限制";
+                    break;
+                case 2:
+                    msg = "只能上传图片文件";
+                    break;
+                default:
+                    msg = "上传文件失败";
+            }
+            document.getElementById('processing2').innerHTML = msg;
+        }
+    </script>
+</head>
+<body>
+<div class="body">
+    <div class="ltable">
+        <div class="table-top"><h1><a class="brand" href="index.html">在线简历制作</a></h1>
+            <hgroup><h3>--创意版</h3></hgroup>
+        </div>
+        <div class="left-box">
+            <div class="toggle1">基本图形<span>》</span></div>
+            <ul class="selectbox1">
+                <li><input type="button" class="srect" value="边框矩形"></li>
+                <li><input type="button" class="frect" value="填充矩形"></li>
+                <li><input type="button" class="fcircle" value="填充圆"></li>
+                <li><input type="button" class="scircle" value="边框圆"></li>
+                <li><input type="button" class="line" value="直线"></li>
+            </ul>
+            <div class="toggle3">图形属性<span>》</span></div>
+            <ul class="selectbox3">
+                <li>输入线条宽度：<input class="line-width" type="number" value="1" style="width: 100px"></li>
+                <li>选择颜色：<input class="color" type="color"></li>
+            </ul>
+            <div class="toggle2">添加文字与图片<span>》</span></div><!--未完成-->
+            <ul class="selectbox2">
+                <li class="b-li"><input class="txt" value="文字" type="button"></li>
+                <li class="b-li"><input class="tpimg" id="tpimg" value="图片" type="button" onchange=""></li>
+            </ul>
+            <div class="toggle4">简历背景<span>》</span></div>
+            <ul class="selectbox4">
+                <li>使用颜色背景：<input class="bgcolor" type="color" value="white"></li>
+                <li><input class="bgimg"  type="button" value="使用背景图片"></li>
+            </ul><!--未完成-->
+            <div class="toggle5">模板组件<span>》</span></div>
+            <ul class="selectbox5">
+                <li><input type="button" class="bgmb" value="背景模板"></li>
+                <li><input type="button" class="btmb" value="标题模板"></li>
+                <li><input type="button" class="nrmb" value="资料模板"></li>
+                <li><input type="button" class="tpmb" value="内容模板"></li>
+            </ul>
+        </div>
+    </div>
+    <div class="canvas-div" id="fdiv">
+        <canvas id="canvas0" class="canvas0" width="740" height="900"></canvas>
+        <canvas id="canvas1" class="canvas1" width="740" height="900"></canvas>
+        <canvas id="canvas2" class="canvas2" width="740" height="900"></canvas>
+    </div>
+    <div class="rtable">
+        基本功能：
+        <div class="rmenu">
+            <button class="rbtn yulan" id="yulan" value="预览">预览</button>
+        </div>
+        <div class="rmenu">
+            <button class="rbtn chexiao" id="chexiao" >清空图形</button><!--未完成-->
+        </div>
+        <div class="rmenu">
+            <button class="rbtn" id="qingkong" value="清空">清空背景</button>
+        </div>
+        <div class="rmenu">
+            <button class="rbtn cachu" id="cachu" value="擦除">擦除</button>
+        </div>
+        <div class="rmenu">
+            <button class="rbtn" id="down" value="下载">下载</button>
+        </div>
+    </div>
+</div>
+<div id="tjwz" class="xcConfirm verticalAlign">
+    <div class="xc_layer2"></div>
+    <div class="popBox">
+        <div class="ttBox"><a class="clsBtn"></a><span class="tt">添加文本</span></div>
+        <div class="txtBox">
+            <div class="txtBox-top">
+                <strong>提示：</strong><br>
+                <span>字体大小：自己输入，默认大小为50。</span><br>
+                <span>填充：字体为实心字体。<br>边框：字体为空心字体。</span><br>
+                <span>填充颜色：实心字体颜色。<br>边框颜色：空心字体颜色。<br>两者可同时选择，不可都不选。</span>
+            </div>
+            <div class="txtBox-bom">
+                <fieldset style="margin: 10px;padding: 5% 10px;height:50%">
+                    <legend>请完成以下操作：</legend>
+                    <span>文本内容：</span><input type="text" class="wenzinr" value="个人简历" size="65">
+                    <span>填充颜色：</span><input type="color" class="filcolor">
+                    <span style="margin-left: 20px">边框颜色：</span><input type="color" class="stocolor">
+                    <!--<span style="margin-left: 20px">阴影</span><input type="checkbox" class="yiny">-->
+                    <br><span>选择类型：</span><span>填充</span><input type="checkbox" class="ful" id="ful1" checked="checked">
+                    <span>边框</span><input type="checkbox" class="sto" id="sto1">
+                    <span style="margin-left: 20px">文字大小：</span><input type="number" class="wbsize" value="50">
+                </fieldset>
+            </div>
+        </div>
+        <div class="btnArea">
+            <div class="btnGroup"><a class="sgBtn ok" id="wzqd">确定</a></div>
+        </div>
+    </div>
+</div>
+<div id="lie1" class="xcConfirm verticalAlign">
+    <div class="xc_layer2"></div>
+    <div class="popBox">
+        <div class="ttBox"><a id="bg" class="clsBtn"></a><span class="tt">背景模板</span></div>
+        <div class="txtBox">
+            <fieldset style="margin: 10px;padding: 5% 10px;height: 50%">
+                <legend>挑选你喜欢的模板：</legend>
+                <button type="button" class="btn1" id="bgmb1" style="background: url('img/bg1s.jpg') repeat"></button>
+                <button type="button" class="btn1" id="bgmb2" style="background: url('img/bg2s.jpg') repeat"></button>
+                <button type="button" class="btn1" id="bgmb3" style="background: url('img/bg3s.jpg') repeat"></button>
+                <button type="button" class="btn1" id="bgmb4" style="background: url('img/bg4s.jpg') repeat"></button>
+            </fieldset>
+        </div>
+    </div>
+</div>
+<div id="lie2" class="xcConfirm verticalAlign">
+    <div class="xc_layer2"></div>
+    <div class="popBox">
+        <div class="ttBox"><a id="bt" class="clsBtn"></a><span class="tt">标题模板</span></div>
+        <div class="txtBox">
+            <fieldset style="margin: 10px;padding: 5% 10px;height: 50%">
+                <legend>挑选你喜欢的模板：</legend>
+                <button type="button" class="btn2">模版一</button>
+                <button type="button" class="btn22">模版二</button>
+                <button type="button" class="btn222">模版三</button>
+            </fieldset>
+        </div>
+    </div>
+</div>
+<div id="lie3" class="xcConfirm verticalAlign">
+    <div class="xc_layer2"></div>
+    <div class="popBox">
+        <div class="ttBox"><a id="nr" class="clsBtn"></a><span class="tt">资料模板</span></div>
+        <div class="txtBox">
+            <fieldset style="margin: 10px;padding: 5% 10px;height: 50%">
+                <legend>挑选你喜欢的模板：</legend>
+                <button type="button" class="btn3">基本资料</button>
+                <button type="button" class="btn32">联系方式</button>
+                <button type="button" class="btn33">工作经验</button>
+                <button type="button" class="btn34">求职意向</button>
+                <button type="button" class="btn35">教育背景</button>
+                <button type="button" class="btn36">拓展信息</button>
+                <button type="button" class="btn37">拓展信息</button>
+                <button type="button" class="btn38">所学课程</button>
+            </fieldset>
+        </div>
+    </div>
+</div>
+<div id="lie4" class="xcConfirm verticalAlign">
+    <div class="xc_layer2"></div>
+    <div class="popBox">
+        <div class="ttBox"><a id="tp" class="clsBtn"></a><span class="tt">内容模板</span></div>
+        <div class="mubankjdiv">
+            <ul class="mubankuang">
+                <li class="mb-class bghover" id="aa1">工作经验/社会经历</li>
+                <li class="mb-class" id="aa2">教育背景</li>
+                <li class="mb-class" id="aa3">学习课程</li>
+                <li class="mb-class" id="aa4">奖励/证书/科研成果</li>
+            </ul>
+            <div class="mbkjnr" id="mbkjnr1">
+                <div id="jy1" style="width: 98%;height:50%;margin-bottom: 5%;border:4px whitesmoke double;border-top:none;">
+                    <strong>模板1：--应届毕业生--</strong><br>
+                   <span>1. 2011年暑假，在AA外语学校担任英语教师；<br>
+                    2. 2011年11月-12月，为三星公司做兼职手机促销员；<br>
+                    4. 2012年暑期，在北京电视台新闻频道实习；<br>
+                    5. 2012年11月，参与AA学校培训产品的市场推广策划；<br>
+                    3. 2011年3月，为SS咖啡新产品的上市做前期市场调查；<br>
+                    6. 2013年3月-12月，辅导三名高中学生数学课程。</span>
+                    <a id="syjy1" style="float: right">使用模板</a>
+                </div>
+                <div id="jy2" style="width: 98%;height: 53%;margin-bottom: 5%;border:4px whitesmoke double;">
+                    <strong>模板2：--技术工程师--</strong><br>
+                    <span>工作单位： ******  职位： 技术工程师 <br> 时间： 2008年10月 -- 2010年02月 
+                          工作描述： 安防系统软件操作培训、技术支持及一些设计工作。<br>
+                         工作单位： ******  职位： 技术员<br> 时间： 2007年5月 -- 2008年10月 
+                         工作描述： 竣工验收资料编制、工程图纸绘制。</span>
+                    <a id="syjy2" style="float: right">使用模板</a>
+                </div>
+                <div id="jy3" style="width: 98%;height:70%;margin-bottom: 5%;border:4px whitesmoke double;">
+                    <strong>模板3：--程序开发--</strong><br>
+                    <span>1.2007/08--2007/12
+                           项目名称：公司人力资源管理系统
+                           开发环境：windows2000
+                           数据库: SQL Server2000
+                           开发语言:Java <br>
+                           项目简介: 项目共分为：档案管理、薪资管理、招聘管理、培训管理、考勤管理和合同管理等。实现了企业的人事部门的日常管理工作需要的功能。<br>
+                           责任描述：负责档案管理和招聘管理模块的代码编写及测试 。<br>
+                           责任描述：负责电子监察模块中的绩效测评的代码编写.<br>
+                           2.2006/06--2006/07 网站维护<br>
+                           职务：为信息工程学院建立招生网站</span>
+                    <a id="syjy3" style="float: right">使用模板</a>
+                </div>
+            </div>
+            <div class="mbkjnr" id="mbkjnr2" style="display: none">
+                <div id="jybj1" style="width: 98%;height:30%;margin-bottom: 5%;border:4px whitesmoke double;border-top:none;">
+                    <strong>模板1：</strong><br>
+                    <span>从2011年到2014年就读于湖北大学工程管理专业并获得学士学位。<br>
+                          从2014年到2016年就读于清华大学工程管理专业并获得硕士学位。</span>
+                    <a id="syjybj1" style="float: right">使用模板</a>
+                </div>
+                <div id="jybj2" style="width: 98%;height:30%;margin-bottom: 5%;border:4px whitesmoke double;">
+                    <strong>模板2：</strong><br>
+                    <span>从2011年到2014年就读于聊城大学东昌学院软件工程专业并获得学士学位。<br>
+                        从2014年到2015年在xxxxxxxxx培训中心参加培训，并取得优异成绩。</span>
+                    <a id="syjybj2" style="float: right">使用模板</a>
+                </div>
+            </div>
+            <div class="mbkjnr" id="mbkjnr3" style="display: none">
+                <div id="sxke1" style="width: 98%;height:30%;margin-bottom: 5%;border:4px whitesmoke double;border-top:none;">
+                    <strong>模板1：--工程管理专业--</strong><br>
+                    <span>主修课程：理论力学，材料力学，结构力学，土木工程施工，工程项目管理，工程结构，工程监理，工程估价。</span>
+                    <a id="sysxke1" style="float: right">使用模板</a>
+                </div>
+                <div id="sxke2" style="width: 98%;height:35%;margin-bottom: 5%;border:4px whitesmoke double;">
+                    <strong>模板2：--软件工程专业--</strong><br>
+                    <span>主修课程：操作系统、数据结构、计算机网络、软件工程、软件项目管理、数据库原理、CMM（能力成熟度模型）、网站开发、计算机组成原理、软件测试、网络高级技术、ASP.NET、C#语言编程等。</span>
+                    <a id="sysxke2" style="float: right">使用模板</a>
+                </div>
+                <div id="sxke3" style="width: 98%;height:35%;margin-bottom: 5%;border:4px whitesmoke double;">
+                    <strong>模板3：--英语能力--</strong><br>
+                    <span>本人不仅获得了英语四六级证书，而且在应用英语方面的水平也是相当不错的，无论是听力还是口语、写作等方面都完全能够满足实际需求。</span>
+                    <a id="sysxke3" style="float: right">使用模板</a>
+                </div>
+                <div id="sxke4" style="width: 98%;height:35%;margin-bottom: 5%;border:4px whitesmoke double;">
+                    <strong>模板4：--计算机能力（非计算机专业）--</strong><br>
+                    <span>能够熟练使用一下办公软件：Word、Excel、PowerPoint、Access数据库，能够帮助我提高工作效率。</span>
+                    <a id="sysxke4" style="float: right">使用模板</a>
+                </div>
+            </div>
+            <div class="mbkjnr" id="mbkjnr4" style="display: none">
+                <div id="jlzsky1" style="width: 98%;height:30%;margin-bottom: 5%;border:4px whitesmoke double;border-top:none;">
+                    <strong>模板1：--奖学金/称号--</strong><br>
+                    <span>奖项一：2015年获省优秀大学生称号。<br>
+                          奖项二：2015年获国家一等奖学金。</span>
+                    <a id="syjlzsky1" style="float: right">使用模板</a>
+                </div>
+                <div id="jlzsky2" style="width: 98%;height:30%;margin-bottom: 5%;border:4px whitesmoke double;border-top:none;">
+                    <strong>模板2：--参赛证书--</strong><br>
+                    <span>奖项一：2015年获得齐鲁软件设计大赛三等奖。<br>
+                          奖项二：2015年获全国大学生英语竞赛二等奖。</span>
+                    <a id="syjlzsky2" style="float: right">使用模板</a>
+                </div>
+                <div id="jlzsky3" style="width: 98%;height:20%;margin-bottom: 5%;border:4px whitesmoke double;border-top:none;">
+                    <strong>模板3：--技能证书--</strong><br>
+                    <span>通过了信息产业部和国家人事部共同举办的软件设计师考试。</span>
+                    <a id="syjlzsky3" style="float: right">使用模板</a>
+                </div>
+                <div id="jlzsky4" style="width: 98%;height:50%;margin-bottom: 5%;border:4px whitesmoke double;border-top:none;">
+                    <strong>模板4：--科研成果--</strong><br>
+                    <span>2015.02-2015.03      手机芯片H.265/H.264硬件编码<br>
+                        项目描述：项目主要是在海思芯片上实现H.264/H.265的硬件编码，并使之符合音视频编解码标准OpenMax。<br> 
+                        主要职责：主要负责搭建在手机端运行的测试驱动环境。<br>
+                        涵盖技术：在Android开发板上使用Native C实现对OpenMax的动态库调用，并使用多线程和Unix Domain Socket实现了对多通道的支持。</span>
+                    <a id="syjlzsky4" style="float: right">使用模板</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="beijing2" class="xcConfirm verticalAlign">
+    <div class="xc_layer"></div>
+    <div class="popBox">
+        <div class="ttBox"><a id="bt1" class="clsBtn1"></a><span class="tt">标题模板1</span></div>
+        <div class="txtBox">
+            <div class="txtBox-top">
+                <div style="position: relative; width: 300px; height: 100px;">
+                    <img src="img/bt1.png" width="100%" height="100%" >
+                    </div>
+            </div>
+            <div class="txtBox-bom">
+                <fieldset style="margin: 10px;padding: 5% 10px;height: 50%">
+                    <legend>请输入以下内容：</legend>
+                    标题名称：
+                    <input type="text" class="mubiaogangwei" id="inpt1"  size="20">
+                    例如：个人资料
+                </fieldset>
+            </div>
+        </div>
+        <div class="btnArea">
+            <div class="btnGroup"><a class="sgBtn ok" id="btmb1">确定</a></div>
+        </div>
+    </div>
+</div>
+<div id="beijing22" class="xcConfirm verticalAlign">
+    <div class="xc_layer"></div>
+    <div class="popBox">
+        <div class="ttBox"><a id="bt11" class="clsBtn1"></a><span class="tt">标题模板2</span></div>
+        <div class="txtBox">
+            <div class="txtBox-top">
+                <div style="position: relative; width: 350px; height: 80px;">
+                    <img src="img/22.png" width="100%" height="100%" alt="">
+                 </div>
+            </div>
+            <div class="txtBox-bom">
+                <fieldset style="margin: 10px;padding: 5% 10px;height: 50%">
+                    <legend>请输入以下内容：</legend>
+                    标题名称：
+                    <input type="text" class="mubiaogangwei" id="inpt2"  size="20">
+                    例如：个人资料
+                </fieldset>
+            </div>
+        </div>
+        <div class="btnArea">
+            <div class="btnGroup"><a class="sgBtn ok" id="btmb2">确定</a></div>
+        </div>
+    </div>
+</div>
+<div id="beijing222" class="xcConfirm verticalAlign">
+    <div class="xc_layer"></div>
+    <div class="popBox">
+        <div class="ttBox"><a id="bt111" class="clsBtn1"></a><span class="tt">标题模板3</span></div>
+        <div class="txtBox">
+            <div class="txtBox-top">
+                <div style="position: relative; width: 350px; height: 80px;">
+                    <img src="img/222.png" width="100%" height="100%" alt="">
+                </div>
+            </div>
+            <div class="txtBox-bom">
+                <fieldset style="margin: 10px;padding: 5% 10px;height: 50%">
+                    <legend>请输入以下内容：</legend>
+                    标题名称：
+                    <input type="text" class="mubiaogangwei" id="inpt3"  size="20">
+                    例如：个人资料
+                </fieldset>
+            </div>
+        </div>
+        <div class="btnArea">
+            <div class="btnGroup"><a class="sgBtn ok" id="btmb3">确定</a></div>
+        </div>
+    </div>
+</div>
+<div id="beijing3" class="xcConfirm verticalAlign">
+    <div class="xc_layer"></div>
+    <div class="popBox">
+        <div class="ttBox"><a id="nr1" class="clsBtn1"></a><span class="tt">基本信息</span></div>
+        <div class="txtBox">
+            <div class="txtBox-top">
+                <div style="position: relative; width: 355px; height: 100px;">
+                    <img src="img/jbxx.png" width="350" height="100" >
+                </div>
+            </div>
+            <div class="txtBox-bom">
+                <fieldset style="margin: 10px;padding: 5% 10px;height: 50%">
+                    <legend>请输入以下内容：</legend>
+                    <span>姓名：</span><input type="text" class="mubiaogangwei" id="xm" size="20">
+                    <span style="margin-left: 30px">性别：</span><input type="text" class="mubiaoxinzi" id="xb" size="10"><br>
+                    <span style="margin-left: 30px">民族：</span><input type="text" class="mubiaoxinzi" id="mz" size="10">
+                    <span style="margin-left: 30px">学历：</span><input type="text" class="mubiaoxinzi" id="xl"  size="10">
+                    <span style="margin-left: 30px">年龄：</span><input type="text" class="mubiaoxinzi" id="nl"  size="4"><br>
+                    <span style="margin-left: 30px">专业：</span><input type="text" class="mubiaoxinzi" id="zy"  size="25">
+                    <span style="margin-left: 30px">政治面貌：</span><input type="text" class="mubiaoxinzi"  id="zzmm" size="10">
+                </fieldset>
+            </div>
+        </div>
+        <div class="btnArea">
+            <div class="btnGroup"><a class="sgBtn ok" id="jbxxz">确定</a></div>
+        </div>
+    </div>
+</div>
+<div id="beijing32" class="xcConfirm verticalAlign">
+    <div class="xc_layer"></div>
+    <div class="popBox">
+        <div class="ttBox"><a id="nr11" class="clsBtn1"></a><span class="tt">联系方式</span></div>
+        <div class="txtBox">
+            <div class="txtBox-top">
+                <div style="position: relative; width: 350px; height: 150px;">
+                    <strong>提示：</strong><br>
+                    <span>联系方式：联系方式很重要，务必保证准确。<br>住址要写目前居住地。</span>
+                </div>
+            </div>
+            <div class="txtBox-bom">
+                <fieldset style="margin: 10px;padding: 5% 10px;height: 50%">
+                    <legend>请输入以下内容：</legend>
+                    <span>联系电话：</span><input type="text" class="mubiaogangwei" id="dh" size="20">
+                    <span>电子邮箱：</span><input type="text" class="mubiaoxinzi" id="yx" size="25"><br><br>
+                    <span>家庭住址：</span><input type="text" class="mubiaoxinzi" id="dz" size="50">
+                </fieldset>
+            </div>
+        </div>
+        <div class="btnArea">
+            <div class="btnGroup"><a class="sgBtn ok" id="lxfs">确定</a></div>
+        </div>
+    </div>
+</div>
+<div id="beijing33" class="xcConfirm verticalAlign">
+    <div class="xc_layer"></div>
+    <div class="popBox">
+        <div class="ttBox"><a id="nr12" class="clsBtn1"></a><span class="tt">工作经历/社会经历</span></div>
+        <div class="txtBox">
+            <div class="txtBox-top">
+                <strong>提示：</strong><br>
+                <span>工作经历/社会经历：写最近几次工作经验，着重写任职岗位和在职时所负责的工作及工作成果。<br>
+                应届毕业生，注明这个字样 ,工作经历没有就不写， 但是填写在校期间的社会实践 重点:社会实践的时间，内容，自己的感想 自我评价。</span>
+            </div>
+            <div class="txtBox-bom">
+                <fieldset style="margin: 10px;padding: 5% 10px;height: 50%">
+                    <legend>请输入以下内容：</legend>
+                    工作经历/社会经历：<textarea  id="shjl" cols="60" style="resize: none;"></textarea>
+                </fieldset>
+            </div>
+        </div>
+        <div class="btnArea">
+            <div class="btnGroup"><a class="sgBtn ok" id="sgzjy">确定</a></div>
+        </div>
+    </div>
+</div>
+<div id="beijing34" class="xcConfirm verticalAlign">
+    <div class="xc_layer"></div>
+    <div class="popBox">
+        <div class="ttBox"><a id="nr13" class="clsBtn1"></a><span class="tt">求职意向</span></div>
+        <div class="txtBox">
+            <div class="txtBox-top">
+                <strong>提示：</strong><br>
+                <span>关于薪资：HR在筛选简历时，对于目标薪资也有要求：薪资不能高于公司预算，太低显得求职者对自身价值判断不准确，
+                这就要求求职者需要在这方面下一点功夫。</span><br>
+                <span>目标职位：如果有准确的岗位，可以直接写岗位名称，也可以写大体方向。</span>
+            </div>
+            <div class="txtBox-bom">
+                <fieldset style="margin: 10px;padding: 5% 10px;height: 50%">
+                    <legend>请输入以下内容：</legend>
+                    <span>目标薪资：<input id="bxz" type="text" size="45"></span><br><br>
+                    <span>目标职位：<input id="bzw" type="text" size="45"></span>
+                </fieldset>
+            </div>
+        </div>
+        <div class="btnArea">
+            <div class="btnGroup"><a class="sgBtn ok" id="mbzw">确定</a></div>
+        </div>
+    </div>
+</div>
+<div id="beijing35" class="xcConfirm verticalAlign">
+    <div class="xc_layer"></div>
+    <div class="popBox">
+        <div class="ttBox"><a id="nr14" class="clsBtn1"></a><span class="tt">教育信息</span></div>
+        <div class="txtBox">
+            <div class="txtBox-top">
+                    <strong>提示:</strong><br><br>
+                    <span>毕业院校：填最近的毕业学校，若是硕士或博士毕业也一定要填写本科学历</span><br><br>
+                    <span>教育经历：从XX年到XX年XXXX大学XXXX专业XX学位</span> <br><br>
+            </div>
+            <div class="txtBox-bom">
+                <fieldset style="margin: 10px;padding: 5% 10px;height: 50%">
+                    <legend>请输入以下内容：</legend>
+                    毕业院校：<input id="byxx" type="text" size="60" style="margin-bottom: 5px"><br>
+                    <span>教育经历：<textarea id="jybj" cols="50" style="resize: none"></textarea></span>
+                </fieldset>
+            </div>
+        </div>
+        <div class="btnArea">
+            <div class="btnGroup"><a class="sgBtn ok" id="jyxx">确定</a></div>
+        </div>
+    </div>
+</div>
+<div id="beijing36" class="xcConfirm verticalAlign">
+    <div class="xc_layer"></div>
+    <div class="popBox">
+        <div class="ttBox"><a id="nr15" class="clsBtn1"></a><span class="tt">拓展信息</span></div>
+        <div class="txtBox">
+            <div class="txtBox-top">
+                <strong>提示：</strong><br><br>
+                <span>计算机/英语能力：大学英语等级和计算机等级或者对某些软件熟练应用。</span><br><br>
+            </div>
+            <div class="txtBox-bom">
+                <fieldset style="margin: 10px;padding: 5% 10px;height: 50%">
+                    <legend>请输入以下内容：</legend>
+                    计算机/英语能力：<textarea id="jsyy" rows="2" cols="40"></textarea><br>
+                </fieldset>
+            </div>
+        </div>
+        <div class="btnArea">
+            <div class="btnGroup"><a class="sgBtn ok" id="tz11">确定</a></div>
+        </div>
+    </div>
+</div>
+<div id="beijing37" class="xcConfirm verticalAlign">
+    <div class="xc_layer"></div>
+    <div class="popBox">
+        <div class="ttBox"><a id="nr16" class="clsBtn1"></a><span class="tt">拓展信息</span></div>
+        <div class="txtBox">
+            <div class="txtBox-top">
+                <strong>提示：</strong><br><br>
+                <span>奖励/证书/科研成果：需要把大学期间所获得奖励和证书写上，科研成果选填，可以是科研作品或者是
+                    发表过的论文、文章等等，内容务必真实。</span>
+            </div>
+            <div class="txtBox-bom">
+                <fieldset style="margin: 10px;padding: 5% 10px;height: 50%">
+                    <legend>请输入以下内容：</legend>
+                    <span>奖励/证书/科研成果:<textarea id="sjlzs" cols="40" style="resize: none"></textarea></span>
+                </fieldset>
+            </div>
+        </div>
+        <div class="btnArea">
+            <div class="btnGroup"><a class="sgBtn ok" id="tz2">确定</a></div>
+        </div>
+    </div>
+</div>
+<div id="beijing38" class="xcConfirm verticalAlign">
+    <div class="xc_layer"></div>
+    <div class="popBox">
+        <div class="ttBox"><a id="nr151" class="clsBtn1"></a><span class="tt">所学课程</span></div>
+        <div class="txtBox">
+            <div class="txtBox-top">
+                <strong>提示：</strong><br><br>
+                <span>所学课程：挑选一些与所选择 工作相关的主要课程。</span><br><br>
+            </div>
+            <div class="txtBox-bom">
+                <fieldset style="margin: 10px;padding: 5% 10px;height: 50%">
+                    <legend>请输入以下内容：</legend>
+                    <span>所学课程：<textarea id="sxkc" cols="50" style="resize: none"></textarea></span>
+                </fieldset>
+            </div>
+        </div>
+        <div class="btnArea">
+            <div class="btnGroup"><a class="sgBtn ok" id="tz111">确定</a></div>
+        </div>
+    </div>
+</div>
+<div id="beijing1" class="xcConfirm verticalAlign">
+    <div class="xc_layer"></div>
+    <div class="popBox">
+        <div class="ttBox"><a  class="clsBtn1"></a><span class="tt">上传图片</span></div>
+        <div class="txtBox">
+            <div class="txtBox-top">
+                <div style="position: relative; width: 300px; height: 100px;">
+                    提示：<br>
+                    务必上传740*900px的图片。<br>
+                    选择图片后点击确定便可以生成。<br>
+                    等待下方提示上传成功后点击确定即可。
+                </div>
+            </div>
+            <div class="txtBox-bom1">
+                <fieldset style="margin: 10px;padding: 5% 10px;height: 50%">
+                    <form id="bgf" action="upload1.php" method="post" enctype="multipart/form-data" target="form-target" name="tpimg"  onsubmit="startUpload1();">
+                        <input type="hidden" name="MAX_FILE_SIZE" value="1000000" />
+                        <input type="file" class="sctpmb" id="upload1" name="myfile"  >
+                        <input type="submit" id="sub1" name="sub" value="upload" style="display: none;" />
+                    </form>
+                    <iframe style="width:0; height:0; border:0;" name="form-target"></iframe>
+                    <div id="processing1"></div>
+                </fieldset>
+            </div>
+        </div>
+        <div class="btnArea">
+            <div class="btnGroup"><a class="sgBtn ok" id="upload10">确定</a></div>
+        </div>
+    </div>
+</div>
+<div id="beijing10" class="xcConfirm verticalAlign">
+    <div class="xc_layer"></div>
+    <div class="popBox">
+        <div class="ttBox"><a  class="clsBtn1"></a><span class="tt">使用背景图片</span></div>
+        <div class="txtBox">
+           <img id="bg11" width="600px" height="500px">
+        </div>
+        <div class="btnArea">
+            <div class="btnGroup"><a class="sgBtn ok" id="upload11">确定</a></div>
+        </div>
+    </div>
+</div>
+<div id="beijing11" class="xcConfirm verticalAlign">
+    <div class="xc_layer"></div>
+    <div class="popBox">
+        <div class="ttBox"><a  class="clsBtn1"></a><span class="tt">上传图片</span></div>
+        <div class="txtBox">
+            <div class="txtBox-top">
+                <div style="position: relative; width: 300px; height: 100px;">
+                    提示：<br>
+                    可以上传自己的职业照或者图片类作品。<br>
+                    选择图片后点击确定便可以生成。<br>
+                    等待下方提示上传成功后点击确定即可。
+                </div>
+            </div>
+            <div class="txtBox-bom1">
+                <fieldset style="margin: 10px;padding: 5% 10px;height: 50%">
+                    <form id="tpf" action="upload.php" method="post" enctype="multipart/form-data" target="form-target" name="tpimg"  onsubmit="startUpload2();">
+                        <input type="hidden" name="MAX_FILE_SIZE" value="1000000" />
+                        <input type="file" class="sctpmb" id="upload2" name="myfile" >
+                        <input type="submit" id="sub2" name="sub" value="upload" style="display: none;" />
+                    </form>
+                    <iframe style="width:0; height:0; border:0;" name="form-target"></iframe>
+                    <div id="processing2"></div>
+                </fieldset>
+            </div>
+        </div>
+        <div class="btnArea">
+            <div class="btnGroup"><a class="sgBtn ok" id="upload21">确定</a></div>
+        </div>
+    </div>
+</div>
+<div id="sysm" class="xcConfirm verticalAlign">
+    <div class="xc_layer2"></div>
+    <div class="popBox">
+        <div class="ttBox"><span class="tt">使用说明：<h5 style="margin-top: -30px;margin-left: 200px;">请仔细阅读，8秒后点击右下角“知道了”开始使用.</h5></span></div>
+        <img src="img/sysm.png" style="height: 90%">
+        <div class="btnArea">
+            <div class="btnGroup"><a class="sgBtn ok" id="sysmqr">知道了</a></div>
+        </div>
+        </div>
+</div>
+</body>
+</html>

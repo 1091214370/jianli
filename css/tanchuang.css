@@ -1,0 +1,204 @@
+/*垂直居中*/
+.verticalAlign {
+    vertical-align: middle;
+    display: inline-block;
+    height: 100%;
+    margin-left: -1px;
+}
+
+.xcConfirm {
+    display: none;
+}
+
+.xcConfirm .xc_layer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #666666;
+    opacity: 0.5;
+    z-index: 2147000000;
+}
+
+.xcConfirm .xc_layer2 {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #666666;
+    opacity: 0.5;
+    z-index: 2146000000;
+}
+
+.xcConfirm .popBox {
+    position: fixed;
+    left: 45%;
+    top: 30%;
+    background-color: #ffffff;
+    z-index: 2147000001;
+    width: 770px;
+    height: 500px;
+    margin-left: -285px;
+    margin-top: -150px;
+    border-radius: 5px;
+    font-weight: bold;
+    color: #535e66;
+}
+
+.xcConfirm .popBox .ttBox {
+    height: 30px;
+    line-height: 30px;
+    padding: 14px 30px;
+    border-bottom: solid 1px #eef0f1;
+}
+
+.xcConfirm .popBox .ttBox .tt {
+    font-size: 18px;
+    display: block;
+    float: left;
+    height: 30px;
+    position: relative;
+}
+
+.xcConfirm .popBox .ttBox .clsBtn {
+    display: block;
+    cursor: pointer;
+    width: 32px;
+    height: 32px;
+    position: absolute;
+    top: 12px;
+    right: 30px;
+    background: url("../img/icons.png") no-repeat
+}
+.xcConfirm .popBox .ttBox .clsBtn1 {
+    display: block;
+    cursor: pointer;
+    width: 32px;
+    height: 32px;
+    position: absolute;
+    top: 12px;
+    right: 30px;
+    background: url("../img/icons.png") no-repeat
+}
+
+.xcConfirm .popBox .txtBox {
+    margin: 5px 100px;
+    height: 360px;
+    overflow: hidden;
+}
+
+.xcConfirm .popBox .txtBox .txtBox-top {
+    width: 100%;
+    height: 50%;
+}
+
+.xcConfirm .popBox .txtBox .txtBox-bom {
+    width: 100%;
+    height: 50%;
+    border-top: 2px solid gainsboro
+}
+.xcConfirm .popBox .txtBox .txtBox-bom1 {
+    width: 100%;
+    height: 50%;
+    border-top: 2px solid gainsboro
+}
+.xcConfirm .popBox .txtBox .txtBox-bom input {
+    margin-left: 15px;
+    height: 20px
+}
+
+.xcConfirm .popBox .txtBox p {
+    height: 84px;
+    margin-top: 16px;
+    line-height: 26px;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.xcConfirm .popBox .txtBox p input {
+    width: 364px;
+    height: 30px;
+    border: solid 1px #eef0f1;
+    font-size: 18px;
+    margin-top: 6px;
+}
+
+.xcConfirm .popBox .btnArea {
+    border-top: solid 1px #eef0f1;
+}
+
+.xcConfirm .popBox .btnGroup {
+    float: right;
+}
+
+.xcConfirm .popBox .btnGroup .sgBtn {
+    margin-top: 14px;
+    margin-right: 10px;
+}
+
+.xcConfirm .popBox .sgBtn {
+    display: block;
+    cursor: pointer;
+    float: left;
+    width: 95px;
+    height: 35px;
+    line-height: 35px;
+    text-align: center;
+    color: #FFFFFF;
+    border-radius: 5px;
+}
+
+.xcConfirm .popBox .sgBtn.ok {
+    background-color: #0095d9;
+    color: #FFFFFF;
+}
+
+.canvas-wz{
+    width: auto;
+    height:70%;
+    padding: 0;
+}
+.wenbk{
+    width: auto;
+    height: 175px;
+    padding: 0;
+    text-align: center;
+}
+.mubankuang{
+    width: 100%;
+    height: 10%;
+    margin-bottom: 0;
+}
+.mb-class{
+    width: 23%;
+    height: 100%;
+    margin-left: 0;
+    display: block;
+    float: left;
+    text-align: center;
+    padding-top: 1%;
+}
+.mbkjnr{
+    width:92%;
+    height:80%;
+    margin-left: 5.5%;
+    background-color:#afd9ee;
+    overflow:auto;
+}
+.mubankjdiv{
+    width: 98%;
+    height: 80%;
+    border: whitesmoke 2px solid;
+    margin-left: 1%;
+}
+.bghover{
+    background-color:#afd9ee;
+}
+.textclass{
+    border:none;
+}
+.sctpmb{
+   height: 50px;
+}
