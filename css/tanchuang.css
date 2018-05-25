@@ -150,11 +150,15 @@
     border-radius: 5px;
 }
 
-.xcConfirm .popBox .sgBtn.ok {
+.xcConfirm .popBox .ok {
     background-color: #0095d9;
     color: #FFFFFF;
 }
 
+.xcConfirm .popBox .bre {
+    background-color: #858788;
+    color: #FFFFFF;
+}
 .canvas-wz{
     width: auto;
     height:70%;

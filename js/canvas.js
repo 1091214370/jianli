@@ -14,6 +14,10 @@ $(document).ready(function () {
     var img3=new Image();
     var img4=new Image();
     var img5=new Image();
+    img1.src = "img/bg1.jpg";
+    img2.src = "img/bg2.png";
+    img3.src="img/bg3.jpg";
+    img4.src="img/bg4.jpg";
     $(".line").click(function () {       //画直线
         var oX, oY;
         var flag = false;
@@ -332,10 +336,6 @@ $(document).ready(function () {
         $("#wenbk").append();
     });
     $(".bgmb").click(function () {
-        img1.src = "img/bg1.jpg";
-        img2.src = "img/bg2.png";
-        img3.src="img/bg3.jpg";
-        img4.src="img/bg4.jpg";
         $("#lie1").show();//弹出框打开
     });
     $(".btmb").click(function () {
@@ -745,10 +745,10 @@ $(document).ready(function () {
         $("#beijing33").show();
     });
     $("#syjy2").click(function () {
-        $("#shjl").val( "工作单位： ******  职位： 技术工程师 ; 时间： 2008年10月 -- 2010年02月"+
-        "工作描述： 安防系统软件操作培训、技术支持及一些设计工作。"+
-        "工作单位： ******  职位： 技术员； 时间： 2007年5月 -- 2008年10月"+
-        "工作描述： 竣工验收资料编制、工程图纸绘制。");
+        $("#shjl").val( "工作单位： ******  职位： 技术工程师 ; 时间： 2008年10月 -- 2010年02月"+
+        "工作描述： 安防系统软件操作培训、技术支持及一些设计工作。"+
+        "工作单位： ******  职位： 技术员； 时间： 2007年5月 -- 2008年10月"+
+        "工作描述： 竣工验收资料编制、工程图纸绘制。");
         $("#beijing33").show();
     });
     $("#syjy3").click(function () {
@@ -800,7 +800,7 @@ $(document).ready(function () {
         $("#beijing37").show();
     });
     $("#syjlzsky4").click(function () {
-        $("#sjlzs").val( "2015.02-2015.03      手机芯片H.265/H.264硬件编码"+
+        $("#sjlzs").val( "2015.02-2015.03      手机芯片H.265/H.264硬件编码"+
         "项目描述：项目主要是在海思芯片上实现H.264/H.265的硬件编码，并使之符合音视频编解码标准OpenMax。"+
         "主要职责：主要负责搭建在手机端运行的测试驱动环境。"+
         "涵盖技术：在Android开发板上使用Native C实现对OpenMax的动态库调用，并使用多线程和Unix Domain Socket实现了对多通道的支持。");
@@ -809,8 +809,9 @@ $(document).ready(function () {
     //右侧菜单
     $(".yulan").click(function () {           //预览
         var type = "png";
-        var canvasdiv = "<canvas width=740 height=900 style='display:none'></canvas>";
+        var canvasdiv = "<canvas width=740 height=900 style='display:none;z-index: 0;'></canvas>";
         html2canvas($(".canvas-div"), {
+            useCORS: true,
             onrendered: function (canvas) {
                 $(".canvas-div").append(canvasdiv);
                 var imgData = canvas.toDataURL();
@@ -844,7 +845,7 @@ $(document).ready(function () {
     });
     $("#down").click(function () {      //下载
         var type = "png";
-        var canvasdiv = "<canvas width=740 height=900 style='display:none'></canvas>";
+        var canvasdiv = "<canvas width=740 height=900 style='display:none;z-index: 0;'></canvas>";
         html2canvas($(".canvas-div"), {
             onrendered: function (canvas) {
                 $(".canvas-div").append(canvasdiv);
@@ -880,10 +881,23 @@ $(document).ready(function () {
         });
     });
     // 使用说明,8秒后可用。
-    $("#sysm").show();
-    $('#sysmqr').hide();
-    setTimeout(function () {
-            $("#sysmqr").show().click(function () {
-                $("#sysm").hide();})
-    }, 8000)
+    // $("#sysm").show();
+    // $('#sysmqr').hide();
+    // 使用说明,8秒后可用。
+    (()=>{
+        var i = 8;
+        $("#sysm").show();
+        var timerBtn=setInterval(()=>{
+         $('#sysmqr').html(`知道了(${i})`).addClass('bre');            
+            i-=1;
+            if(i<0){
+                clearInterval(timerBtn);
+                $('#sysmqr').html("知道了").removeClass('bre').addClass('ok');
+            }
+        },1000)
+        setTimeout(()=> {
+            $("#sysmqr").show().click(() => {
+            $("#sysm").hide();})
+        }, 8000)
+    })()
 });
