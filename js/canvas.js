@@ -465,7 +465,7 @@ $(document).ready(function () {
         var nl =$("#nl").val();
         var zy =$("#zy").val();
         var zzmm =$("#zzmm").val();
-        var div = '<div class="dtdiv" id="jbxx' + n + '" style="width:300px; z-index: 3;position: absolute"><div class="jbxx"><span>姓名：'+xm+'</span></div><div class="jbxx"><span>性别：'+xb+'</span></div><div class="jbxx"><span>民族：'+mz+'</span></div><div class="jbxx"><span >学历：'+xl+'</span></div><div class="jbxx"><span>年龄：'+nl+'</span></div><div class="jbxx"><span>政治面貌：'+zzmm+'</span></div><div class="jbxx1" style="width: 300px;display: block;float: left"><span>专业：'+zy+'</span></div></div>';
+        var div = '<div class="dtdiv" id="jbxx' + n + '" style="width:300px; z-index: 3;position: absolute"><div class="jbxx"><span>姓名：'+xm+'</span></div><div class="jbxx"><span>性别：'+xb+'</span></div><div class="jbxx"><span >学历：'+xl+'</span></div><div class="jbxx"><span>年龄：'+nl+'</span></div><div class="jbxx1" style="width: 300px;display: block;float: left"><span>专业：'+zy+'</span></div></div>';
         $("#fdiv").append(div);
         $(".jbxx").css({"width":"140px","margin-right": "10px", "display": "block", "float": "left"});
         $("#jbxx" + n).draggable({containment: ".canvas-div"});
